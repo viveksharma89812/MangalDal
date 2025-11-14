@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MangalDal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4df8805f0751182bbdcf157022fe044df1655fbd")]
 [assembly: System.Reflection.AssemblyProductAttribute("MangalDal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MangalDal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

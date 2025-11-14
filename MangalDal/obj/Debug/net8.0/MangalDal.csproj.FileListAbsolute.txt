@@ -14,6 +14,7 @@ C:\Users\240047\Desktop\MangalDal\MangalDal\obj\Debug\net8.0\MangalDal.csproj.Co
 C:\Users\240047\Desktop\MangalDal\MangalDal\obj\Debug\net8.0\MangalDal.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\240047\Desktop\MangalDal\MangalDal\obj\Debug\net8.0\MangalDal.RazorAssemblyInfo.cache
 C:\Users\240047\Desktop\MangalDal\MangalDal\obj\Debug\net8.0\MangalDal.RazorAssemblyInfo.cs
+C:\Users\240047\Desktop\MangalDal\MangalDal\obj\Debug\net8.0\MangalDal.sourcelink.json
 C:\Users\240047\Desktop\MangalDal\MangalDal\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\240047\Desktop\MangalDal\MangalDal\obj\Debug\net8.0\scopedcss\bundle\MangalDal.styles.css
 C:\Users\240047\Desktop\MangalDal\MangalDal\obj\Debug\net8.0\scopedcss\projectbundle\MangalDal.bundle.scp.css

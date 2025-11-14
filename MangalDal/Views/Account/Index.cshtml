@@ -1,1 +1,236 @@
-﻿<h1>Login Page Comming Soon</h1>
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cute Animated Login — Responsive</title>
+    <style>
+        :root{
+          --container-w: 900px;
+          --left-bg: #f8f8f8;
+          --accent: #6c63ff;
+        }
+
+        *{box-sizing: border-box}
+        body{
+          margin:0;
+          font-family: "Poppins", sans-serif;
+          background:#e9ebf2;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          min-height:100vh;
+          padding:20px;
+        }
+
+        .container{
+          width:min(var(--container-w),100%);
+          display:flex;
+          background:white;
+          border-radius:20px;
+          overflow:hidden;
+          box-shadow:0 10px 40px rgba(0,0,0,0.08);
+          gap:0;
+          align-items:stretch;
+        }
+
+        /* LEFT */
+        .left{
+          flex:1 1 40%;
+          min-width:240px;
+          background:var(--left-bg);
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          position:relative;
+          padding:28px;
+        }
+
+        .characters{
+          display:flex;
+          align-items:flex-end;
+          gap:12px;
+          transition:transform .6s ease;
+          transform-origin:center bottom;
+        }
+
+        .char{position:relative;display:flex;justify-content:center;align-items:center;transition:transform .35s ease}
+
+        /* shapes */
+        .orange{width:110px;height:72px;background:#ff6b35;border-radius:120px 120px 0 0; transform:translateX(30px);}
+        .purple{width:64px;height:140px;background:#6c63ff;border-radius:12px}
+        .black{width:42px;height:100px;background:#222;border-radius:8px}
+        .yellow{width:60px;height:70px;background:#ffce00;border-radius:65px 65px 0 0; transform:translateX(-18px)}
+
+        /* face features common */
+        .face{position:absolute;top:20%;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:space-between;width:36px}
+
+        .eye{width:13px;height:13px;background:white;border-radius:50%;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+        .pupil{position:absolute;width:7px;height:7px;background:black;border-radius:50%;top:3px;left:3px;transition:transform .35s ease}
+
+        /* eyelid element for blinking */
+        .lid{position:absolute;left:0;top:0;width:100%;height:0;background:inherit;border-radius:50%;transform-origin:center top}
+
+        /* mouth styles */
+        .mouth{position:absolute;bottom:-14px;left:50%;width:15px;height:8px;border-radius:50%;background:transparent;border:2px solid transparent;border-top:3px solid #222;transform:translateX(-50%)}
+        .blackMouth{position:absolute;bottom:-14px;left:50%;width:15px;height:8px;border-radius:50%;border:2px solid transparent;border-top:3px solid white;transform:translateX(-50%)}
+
+        /* Right side */
+        .right{flex:1 1 60%;padding:56px;display:flex;flex-direction:column;justify-content:center}
+        h2{font-size:24px;margin:0 0 8px 0}
+        p{color:#777;margin:0 0 24px}
+        input{width:100%;padding:12px 14px;border:1px solid #ccc;border-radius:8px;margin-bottom:14px;font-size:14px;transition:.2s}
+        input:focus{border-color:var(--accent);outline:none}
+
+        .options{display:flex;justify-content:space-between;font-size:13px;color:#666;margin-bottom:18px}
+        .login-btn,.google-btn{width:100%;padding:12px;border-radius:8px;border:none;font-size:15px;cursor:pointer}
+        .login-btn{background:#111;color:#fff;margin-bottom:10px}
+        .login-btn:hover{background:#333}
+        .google-btn{border:1px solid #ccc;background:#fff;color:#333;display:flex;align-items:center;justify-content:center;gap:8px}
+
+        small{display:block;text-align:center;margin-top:18px;color:#666}
+        a{color:var(--accent);text-decoration:none}
+
+        /* Blinking animation — default slow blink every 5s */
+        @@keyframes blink {
+          0%, 92%, 100% { height:0 }
+          94% { height:100% }
+          96% { height:0 }
+        }
+
+        /* apply blink to lids but slightly offset per eye for natural look */
+        .eye .lid{animation:blink 5s infinite ease-in-out}
+        /* offset animations for variety */
+        .char:nth-child(1) .eye .lid{animation-delay:0s}
+        .char:nth-child(2) .eye .lid{animation-delay:0.15s}
+        .char:nth-child(3) .eye .lid{animation-delay:0.28s}
+        .char:nth-child(4) .eye .lid{animation-delay:0.45s}
+
+        /* On input focus, make blink quicker for 'attention' effect */
+        .left.attentive .eye .lid{animation-duration:3.2s}
+
+        /* responsive adjustments */
+        @@media (max-width:800px){
+          .container{flex-direction:column;gap:0}
+          .left{width:100%;padding:18px;min-height:200px}
+          .right{width:100%;padding:28px}
+          .characters{gap:10px}
+        }
+
+        @@media (max-width:480px){
+          :root{--container-w:420px}
+          .characters{transform:scale(.85)}
+          .orange{width:90px;height:60px}
+          .purple{width:52px;height:110px}
+          .black{width:36px;height:84px}
+          .yellow{width:50px;height:58px}
+          h2{font-size:20px}
+          .right{padding:20px}
+          input{padding:11px}
+        }
+
+        /* small touch-ups for better visual alignment */
+        .char:active{transform:translateY(-4px)}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- LEFT -->
+        <div class="left" id="leftSide" aria-hidden="false">
+            <div class="characters" id="characters">
+                <div class="char orange" aria-hidden="true">
+                    <div class="face">
+                        <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+                        <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+                        <div class="mouth"></div>
+                    </div>
+                </div>
+                <div class="char purple" aria-hidden="true">
+                    <div class="face">
+                        <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+                        <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+                        <div class="mouth"></div>
+                    </div>
+                </div>
+                <div class="char black" aria-hidden="true">
+                    <div class="face">
+                        <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+                        <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+                        <div class="blackMouth"></div>
+                    </div>
+                </div>
+                <div class="char yellow" aria-hidden="true">
+                    <div class="face">
+                        <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+                        <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+                        <div class="mouth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="right">
+            <h2>Welcome back!</h2>
+            <p>Please enter your details</p>
+            <input type="email" id="email" placeholder="Email" autocomplete="email" />
+            <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
+
+            <button class="login-btn">Log in</button>
+            <button class="google-btn" aria-label="Log in with Google">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google logo" />
+                Log in with Google
+            </button>
+
+            <small>Don’t have an account? <a href="#">Sign up</a></small>
+        </div>
+    </div>
+
+    <script>
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const pupils = document.querySelectorAll('.pupil');
+        const leftSide = document.getElementById('leftSide');
+
+        function lookRight(){
+          pupils.forEach(p => p.style.transform = 'translateX(4px)');
+          leftSide.classList.add('attentive');
+        }
+        function lookLeft(){
+          pupils.forEach(p => p.style.transform = 'translateX(-4px)');
+          leftSide.classList.add('attentive');
+        }
+        function lookCenter(){
+          pupils.forEach(p => p.style.transform = 'translateX(0)');
+          leftSide.classList.remove('attentive');
+        }
+
+        // small vertical movement on focus to feel more lively
+        function lookSlightDown(){
+          pupils.forEach(p => p.style.transform += ' translateY(1px)');
+        }
+
+        email.addEventListener('focus', ()=>{ lookRight(); lookSlightDown() });
+        password.addEventListener('focus', ()=>{ lookLeft(); lookSlightDown() });
+        [email,password].forEach(i => i.addEventListener('blur', lookCenter));
+
+        // optional: when the user types, make characters 'lean' a bit
+        const chars = document.getElementById('characters');
+        email.addEventListener('input', ()=> chars.style.transform = 'translateX(8px)');
+        password.addEventListener('input', ()=> chars.style.transform = 'translateX(-8px)');
+        [email,password].forEach(i=> i.addEventListener('blur', ()=> chars.style.transform = 'translateX(0)'));
+
+        // Accessibility: stop animations if user prefers reduced motion
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if(prefersReduced.matches){
+          document.documentElement.style.setProperty('--reduced','true');
+          // remove blink animation
+          document.querySelectorAll('.eye .lid').forEach(l=> l.style.animation = 'none');
+        }
+    </script>
+</body>
+</html>
